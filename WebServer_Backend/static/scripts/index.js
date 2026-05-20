@@ -175,6 +175,9 @@ chartInstance = new Chart(document.getElementById(canvasId),{
                         hour:'HH:mm'
                     }
                 },
+                ticks:{
+                    maxTickLimit: 10
+                },
                 title: {display:true, text: 'Time(s)'},
                 grid: { color: 'rgba(0,0,0,0.05)' }
             },
@@ -218,7 +221,7 @@ async function pollData(){
             }
 
             // keep last 50 points
-            if (dataPoints.length > 50){
+            if (dataPoints.length > 20){
                 dataPoints.shift();
                 thresholdDataPoints.shift();
             } 
