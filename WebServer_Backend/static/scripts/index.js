@@ -193,7 +193,14 @@ chartInstance = new Chart(document.getElementById(canvasId),{
 async function pollData(){
     try{
             const response = await fetch(`/api/adc/get`);
-            if (!response.ok) throw new Error('HTTP ' + response.status);
+            
+            if (response.status === 204){
+                return;
+            }
+            
+            if (!response.ok){
+                throw new Error('HTTP ' + response.status);
+            } 
             const data = await response.json();
             const now = new Date().toISOString().split('T')[1].split('.')[0];
             dataPoints.push({
