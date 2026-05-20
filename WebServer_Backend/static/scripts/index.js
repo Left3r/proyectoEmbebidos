@@ -66,26 +66,26 @@ PWM_SLIDER.addEventListener('change', async function(e){
 const btnSquare = document.getElementById('btn-pin')
                           .querySelector('.square');
 
-// const listenBtnChange = setInterval (async function(){
-//     try{
-//         const response = await fetch('/api/btn/get', {
-//             method: 'GET',
-//         });
+const listenBtnChange = setInterval (async function(){
+    try{
+        const response = await fetch('/api/btn/get', {
+            method: 'GET',
+        });
 
-//         if (!response.ok){
-//             throw new Error(`HTTP ${response.status}`);
-//         }
-//         const data = await response.json();
-//         //actualiza el cuadro que representa el boton
-//         if (data['btn_bool']){
-//             btnSquare.style.backgroundColor = "#4CAF50"
-//         }else{
-//             btnSquare.style.backgroundColor = "#a0a0a0"
-//         }
-//     }catch (err){
-//         console.error('Queue error', err);
-//     }
-// }, 500);
+        if (!response.ok){
+            throw new Error(`HTTP ${response.status}`);
+        }
+        const data = await response.json();
+        //actualiza el cuadro que representa el boton
+        if (data['btn_bool']){
+            btnSquare.style.backgroundColor = "#4CAF50"
+        }else{
+            btnSquare.style.backgroundColor = "#a0a0a0"
+        }
+    }catch (err){
+        console.error('Queue error', err);
+    }
+}, 1500);
 
 
 // -- grafica --
