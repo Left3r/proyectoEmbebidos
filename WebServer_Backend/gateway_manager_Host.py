@@ -154,11 +154,8 @@ def get_adc_data():
     global graph_data
 
     if len(graph_data) == 0:
-
-        return jsonify({
-            "status": "empty"
-        }), 204
-
+        return '', 204
+    
     value = graph_data.pop(0)
 
     return jsonify({
