@@ -146,7 +146,7 @@ def btn_handler(event):
 # ADC GRAPH
 # =========================================================
 
-graph_data = []
+graph_data = deque(maxlen=40)
 
 @app.route('/api/adc/get', methods=['GET'])
 def get_adc_data():
@@ -156,7 +156,7 @@ def get_adc_data():
     if len(graph_data) == 0:
         return '', 204
     
-    value = graph_data.pop(0)
+    value = graph_data.popleft()
 
     return jsonify({
         "status": "success",
@@ -168,9 +168,19 @@ def adc_handler(value):
 
     global graph_data
 
-    if len(graph_data) > 40:
-        graph_data.pop(0)
-
+    data = request.json
+    if not data:
+        return jsonify({
+            "satuts":"error",
+            "message": "missing json"
+        }), 400
+    
+    if value is None:
+        return jsonify({
+            "status":"error",
+            "message":"missing voltage"
+        }), 400
+    
     graph_data.append(value)
 
     return jsonify({
